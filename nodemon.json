@@ -1,0 +1,9 @@
+{
+    "verbose": true,
+    "ignore": [
+        ".gitignore",
+        "*.test.js",
+        ".env"
+    ],
+    "exec": "node ./src/infra/http/server.js"
+}
