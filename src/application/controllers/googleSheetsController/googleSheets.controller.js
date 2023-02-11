@@ -1,4 +1,4 @@
-const { GoogleSheetsService } = require("./../../services/googleSheets/googleSheets.service");
+const { GoogleSheetsService } = require("../../services/googleSheetsService/googleSheets.service");
 
 class GoogleSheetsController {
     async handle(req, res) {
