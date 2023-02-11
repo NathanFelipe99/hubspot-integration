@@ -3,7 +3,8 @@
     "ignore": [
         ".gitignore",
         "*.test.js",
-        ".env"
+        ".env",
+        "api.http"
     ],
     "exec": "node ./src/infra/http/server.js"
 }
