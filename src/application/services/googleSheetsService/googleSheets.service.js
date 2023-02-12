@@ -1,9 +1,7 @@
-const { google } = require("googleapis");
 const { GoogleSpreadsheet } = require("google-spreadsheet");
 const credentials = require("./../../../../credentials.json");
 
 class GoogleSheetsService {
-    #SCOPES = ['https://www.googleapis.com/auth/spreadsheets'];
 
     async execute(sheetID) {
         const sheetData = await this.#getData(sheetID);
@@ -29,11 +27,11 @@ class GoogleSheetsService {
         const data = [];
 
         for (let index = 0; index < rows.length; index++) {
-            const row = rows[index]["_rawData"];
+            const row = rows[index]["_rawData"] || [];
             if (row.length) {
                 const obj = {};
-                ["companyName", "contactName", "email", "telephone", "website"].forEach((value, index) => {
-                    obj[value] = row[index];
+                ["companyName", "contactName", "email", "telephone", "website"].forEach((key, index) => {
+                    obj[key] = row[index];
                 });
                 
                 data.push(obj);
