@@ -37,6 +37,7 @@ class GoogleSheetsService {
                 data.push(obj);
             }
         }
+
         return data;
     }
 }

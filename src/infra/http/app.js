@@ -5,7 +5,8 @@ const routes = require("./routes/index.js");
 const app = express();
 
 app.use(cors());
-app.use(routes, responseFilter);
+app.use("/api/v1", routes, responseFilter);
+
 app.use(express.json());
 
 module.exports = app;
