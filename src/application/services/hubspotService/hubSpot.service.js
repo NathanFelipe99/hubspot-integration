@@ -5,9 +5,10 @@ const { emailValidation } = require("./../../../shared/utils/corporativeDomains"
 
 class HubspotService {
     googleSheetService
-
+    hubspotClient
     constructor() {
         this.googleSheetService = new GoogleSheetsService();
+        this.hubspotClient = new hubspot.Client({ accessToken: process.env.HUBSPOT_KEY });
     }
 
     async execute(sheetId, email) {
@@ -19,21 +20,12 @@ class HubspotService {
     }
 
     async #createContacts(data, email) {
-        const hubspotClient = new hubspot.Client({
-            accessToken: process.env.HUBSPOT_KEY
-        });
-
-        const filteredData = await this.#filterData(data, email);
+        const filteredData = await this.#filterSheetData(data, email);
         if (!filteredData.length) throw new AppError("No contacts found!", 400);
 
         const responses = [];
-        const hubSpotContacts = await hubspotClient.crm.contacts.searchApi.doSearch({
-            properties: []
-        });
 
-        const registeredEmails = hubSpotContacts.results.map((contact) => {
-            return contact["properties"]["email"]
-        });
+        const registeredEmails = await this.#verifyingContactEmailExistence();
 
         for (let index = 0; index < filteredData.length; index++) {
             const contact = filteredData[index];
@@ -41,7 +33,7 @@ class HubspotService {
             const { company, contactName, email, phone, website } = contact;
             const isCorporativeEmail = await emailValidation(email);
 
-            if (isCorporativeEmail) {
+            if (isCorporativeEmail && !registeredEmails.includes(email)) {
                 const splittedContact = contactName.split(" ");
 
                 const [firstname, lastname] = [splittedContact[0], splittedContact.at(-1)];
@@ -56,11 +48,9 @@ class HubspotService {
                         website
                     }
                 }
-                
-                if (!registeredEmails.includes(email)) {
-                    const response = await hubspotClient.crm.contacts.basicApi.create(simplePublicObjectInput);
-                    responses.push(response);
-                }
+
+                const response = await this.hubspotClient.crm.contacts.basicApi.create(simplePublicObjectInput);
+                responses.push(response);
             }
         }
 
@@ -68,8 +58,18 @@ class HubspotService {
         return responses;
     }
 
-    async #filterData(data, email) {
+    async #filterSheetData(data, email) {
         return email ? data.filter(contact => contact.email === email) : data;
+    }
+
+    async #verifyingContactEmailExistence() {
+        const hubSpotContacts = await this.hubspotClient.crm.contacts.searchApi.doSearch({
+            properties: []
+        });
+
+        return hubSpotContacts.results.map((contact) => {
+            return contact["properties"]["email"]
+        });
     }
 
 }
