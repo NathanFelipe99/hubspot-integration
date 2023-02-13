@@ -24,20 +24,19 @@ class GoogleSheetsService {
         });
         
         const rows = await sheet.getRows();
+        
         const data = [];
-
         for (let index = 0; index < rows.length; index++) {
             const row = rows[index]["_rawData"] || [];
             if (row.length) {
                 const obj = {};
-                ["companyName", "contactName", "email", "telephone", "website"].forEach((key, index) => {
+                ["company", "contactName", "email", "phone", "website"].forEach((key, index) => {
                     obj[key] = row[index];
                 });
                 
                 data.push(obj);
             }
         }
-
         return data;
     }
 }

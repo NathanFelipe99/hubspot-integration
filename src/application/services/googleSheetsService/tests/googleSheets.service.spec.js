@@ -10,14 +10,14 @@ describe("Testing GoogleSheet API", () => {
     });
 
     it("should be able to read sheet data", async () => {
-        const data = await googleSheetService.execute(process.env.SHEET_ID);
+        const data = await googleSheetService.execute(process.env.TEST_SHEET_ID);
         expect(data).toBeInstanceOf(Array);
 
         if (data.length) {
-            expect(data[0]).toHaveProperty("companyName");
+            expect(data[0]).toHaveProperty("company");
             expect(data[0]).toHaveProperty("contactName");
             expect(data[0]).toHaveProperty("email");
-            expect(data[0]).toHaveProperty("telephone");
+            expect(data[0]).toHaveProperty("phone");
             expect(data[0]).toHaveProperty("website");
         }
     });

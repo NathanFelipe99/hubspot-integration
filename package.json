@@ -5,11 +5,13 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "start:dev": "nodemon"
+    "dev": "nodemon",
+    "prod": "node ./src/infra/http/server.js"
   },
   "author": "NathanFelipe99",
   "license": "MIT",
   "dependencies": {
+    "@hubspot/api-client": "^8.5.0",
     "@types/cors": "^2.8.13",
     "axios": "^1.3.2",
     "cors": "^2.8.5",
