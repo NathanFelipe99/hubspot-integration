@@ -3,7 +3,7 @@ const { HubspotService } = require("../../services/hubspotService/hubSpot.servic
 class HubspotController {
     async handle(req, res) {
         try {
-            const { sheetId, email } = req.body;
+            const { sheetId, email } = req.body;            
             const hubspotService = new HubspotService();
 
             const createdContacts = await hubspotService.execute(sheetId, email);

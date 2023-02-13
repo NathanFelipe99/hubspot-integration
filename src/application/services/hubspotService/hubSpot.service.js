@@ -27,6 +27,13 @@ class HubspotService {
         if (!filteredData.length) throw new AppError("No contacts found!", 400);
 
         const responses = [];
+        const hubSpotContacts = await hubspotClient.crm.contacts.searchApi.doSearch({
+            properties: []
+        });
+
+        const registeredEmails = hubSpotContacts.results.map((contact) => {
+            return contact["properties"]["email"]
+        });
 
         for (let index = 0; index < filteredData.length; index++) {
             const contact = filteredData[index];
@@ -49,9 +56,11 @@ class HubspotService {
                         website
                     }
                 }
-
-                const response = await hubspotClient.crm.contacts.basicApi.create(simplePublicObjectInput);
-                responses.push(response);
+                
+                if (!registeredEmails.includes(email)) {
+                    const response = await hubspotClient.crm.contacts.basicApi.create(simplePublicObjectInput);
+                    responses.push(response);
+                }
             }
         }
 
