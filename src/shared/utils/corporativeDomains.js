@@ -3,7 +3,10 @@ async function emailValidation(email) {
     const nonCorporativeDomainsList = [
         "gmail.com",
         "outlook.com",
-        "yahoo.com.br"
+        "yahoo.com.br",
+        "hotmail.com",
+        "uol.com.br",
+        "icloud.com"
     ];
 
     const emailDomain = email.split("@")[1];

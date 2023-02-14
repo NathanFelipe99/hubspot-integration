@@ -10,7 +10,7 @@ class HubspotController {
 
             return res.status(200).json(createdContacts);
         } catch (e) {
-            return res.status(400).json({ error: e.message });
+            return res.status(e.statusCode).json({ error: e.message });
         }
     }
 }

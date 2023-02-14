@@ -18,5 +18,5 @@ Jest <img height="20" src="https://user-images.githubusercontent.com/25181517/18
 
  3. Crie na raíz do projeto um arquivo .env com suas credenciais: APP_PORT, API_KEY, HUBSPOT_KEY e TEST_SHEET_ID.
  
- 4. Execute o script "**npm run start**".
+ 4. Execute o script "**npm run prod**".
  
