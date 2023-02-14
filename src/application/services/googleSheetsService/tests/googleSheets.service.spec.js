@@ -2,7 +2,6 @@ const { GoogleSheetsService } = require("../googleSheets.service");
 const path = require('path');
 require("dotenv").config({ path: path.resolve(__dirname, "./../../../../../.env")});
 
-
 let googleSheetService;
 describe("Testing GoogleSheet API", () => {
     beforeEach(() => {

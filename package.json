@@ -7,7 +7,7 @@
     "test": "jest",
     "dev": "nodemon",
     "prod": "node ./src/infra/http/server.js",
-    "lint": ""
+    "lint": "eslint . --ext .js,.spec.js"
   },
   "author": "NathanFelipe99",
   "license": "MIT",
