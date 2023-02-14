@@ -12,6 +12,6 @@ async function emailValidation(email) {
     const emailDomain = email.split("@")[1];
 
     return regex.test(email) && !nonCorporativeDomainsList.includes(emailDomain);
-};
+}
 
 module.exports = { emailValidation };

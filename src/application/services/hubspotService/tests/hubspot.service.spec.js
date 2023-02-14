@@ -1,6 +1,5 @@
 const { HubspotService } = require("../hubSpot.service");
 const path = require('path');
-const { AppError } = require("../../../../shared/errors/AppError");
 require("dotenv").config({ path: path.resolve(__dirname, "./../../../../../.env") });
 
 let hubspotService;

@@ -16,7 +16,7 @@ Jest <img height="20" src="https://user-images.githubusercontent.com/25181517/18
 
  2. Instale as dependências com **"npm install"**.
 
- 3. Crie na raíz do projeto um arquivo .env com suas credenciais: APP_PORT, API_KEY, HUBSPOT_KEY e TEST_SHEET_ID.
+ 3. Crie na raíz do projeto um arquivo .env com suas credenciais (API_KEY e HUBSPOT_KEY) e variáveis de ambiente (APP_PORT e TEST_SHEET_ID).
  
  4. Execute o script "**npm run prod**".
  
